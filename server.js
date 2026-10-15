@@ -6,9 +6,10 @@ const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
 
-// CORS: only allow your Netlify frontend (comma-separated list supported) + local dev
+// CORS: allow Vercel frontend (hardcoded) + env list + local dev
 const allowed = (process.env.FRONTEND_URL || '')
   .split(',').map((s) => s.trim().replace(/\/$/, '')).filter(Boolean);
+allowed.push('https://student-frontend-ashy.vercel.app');
 if (process.env.NODE_ENV !== 'production') {
   allowed.push('http://localhost:3000', 'http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:8080');
 }
